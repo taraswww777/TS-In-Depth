@@ -6,9 +6,17 @@ enum Category {
     Angular,
 }
 
+type library = {
+    lib: string,
+    assertions: number,
+    books: number,
+    avgPagesPerBook: number
+}
+
 function getAllBooks(): ReadonlyArray<any> {
     return [
         {
+            id: 1,
             title: 'Refactoring JavaScript',
             assertions: 1,
             category: Category.JavaScript,
@@ -16,6 +24,7 @@ function getAllBooks(): ReadonlyArray<any> {
             available: true
         },
         {
+            id: 2,
             title: 'Refactoring Angular',
             assertions: 1,
             category: Category.Angular,
@@ -23,6 +32,7 @@ function getAllBooks(): ReadonlyArray<any> {
             available: true
         },
         {
+            id: 3,
             title: 'JavaScript Testing',
             assertions: 1,
             category: Category.HTML,
@@ -30,18 +40,29 @@ function getAllBooks(): ReadonlyArray<any> {
             available: false
         },
         {
+            id: 4,
             title: 'CSS Secrets',
             assertions: 1,
             category: Category.CSS,
             author: 'Lea Verou',
-            available: true},
+            available: true
+        },
         {
+            id: 5,
             title: 'Mastering JavaScript Object-Oriented Programming',
             assertions: 1,
             category: Category.TypeScript,
             author: 'Andrea Chiarelli',
             available: true
         }
+    ];
+}
+
+function getAllLibs(): ReadonlyArray<library> {
+    return [
+        {lib: 'libName1', assertions: 1, books: 1_000_000_000, avgPagesPerBook: 250},
+        {lib: 'libName2', assertions: 1, books: 5_000_000_000, avgPagesPerBook: 300},
+        {lib: 'libName3', assertions: 1, books: 3_000_000_000, avgPagesPerBook: 280}
     ];
 }
 
@@ -58,12 +79,11 @@ function logFirstAvailable(books: readonly any[]) {
 
 function getBookTitlesByCategory(category: Category): string[] {
     let titles: string[] = [];
-    const books = getAllBooks();
-    for (const book of books) {
+    getAllBooks().forEach((book)=>{
         if (book.category === category) {
             titles.push(book.title);
         }
-    }
+    });
     return titles;
 }
 
@@ -84,25 +104,22 @@ function getBookAuthorByIndex(index: number): [string, string] {
 }
 
 function calcTotalPages(): bigint {
-    type library = {
-        lib: string,
-        assertions: number,
-        books: number,
-        avgPagesPerBook: number
-    }
-
-    const libs: library[] = [
-        {lib: 'libName1', assertions: 1, books: 1_000_000_000, avgPagesPerBook: 250},
-        {lib: 'libName2', assertions: 1, books: 5_000_000_000, avgPagesPerBook: 300},
-        {lib: 'libName3', assertions: 1, books: 3_000_000_000, avgPagesPerBook: 280}
-    ];
-    return libs.reduce((accumulator, lib: library) => {
+    return getAllLibs().reduce((accumulator, lib: library) => {
         return accumulator + BigInt(lib.avgPagesPerBook) * BigInt(lib.books)
     }, BigInt(0));
 }
 
-// Task 02.01. Basic Types
+function getBookByID(bookId:number):any{
+    return getAllBooks().find((book)=>book.id === bookId)
+}
+
+console.log('Task 02.01. Basic Types:');
 logFirstAvailable(getAllBooks());
 logBookTitles(getBookTitlesByCategory(Category.Angular));
 getBookAuthorByIndex(0);
 console.log('calcTotalPages: ', calcTotalPages());
+
+console.log('---');
+console.log('Task 03.01. Arrow Functions');
+logBookTitles(getBookTitlesByCategory(Category.JavaScript));
+console.log('getBookByID:',getBookByID(1) );
