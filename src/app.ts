@@ -8,12 +8,36 @@ enum Category {
 
 function getAllBooks(): ReadonlyArray<any> {
     return [
-        {title: 'Refactoring JavaScript', category: Category.JavaScript, author: 'Evan Burchard', available: true},
-        {title: 'Refactoring Angular', category: Category.Angular, author: 'Evan Burchard', available: true},
-        {title: 'JavaScript Testing', category: Category.HTML, author: 'Liang Yuxian Eugene', available: false},
-        {title: 'CSS Secrets', category: Category.CSS, author: 'Lea Verou', available: true},
+        {
+            title: 'Refactoring JavaScript',
+            assertions: 1,
+            category: Category.JavaScript,
+            author: 'Evan Burchard',
+            available: true
+        },
+        {
+            title: 'Refactoring Angular',
+            assertions: 1,
+            category: Category.Angular,
+            author: 'Evan Burchard',
+            available: true
+        },
+        {
+            title: 'JavaScript Testing',
+            assertions: 1,
+            category: Category.HTML,
+            author: 'Liang Yuxian Eugene',
+            available: false
+        },
+        {
+            title: 'CSS Secrets',
+            assertions: 1,
+            category: Category.CSS,
+            author: 'Lea Verou',
+            available: true},
         {
             title: 'Mastering JavaScript Object-Oriented Programming',
+            assertions: 1,
             category: Category.TypeScript,
             author: 'Andrea Chiarelli',
             available: true
@@ -21,7 +45,7 @@ function getAllBooks(): ReadonlyArray<any> {
     ];
 }
 
-function logFirstAvailable(books: ReadonlyArray<any>) {
+function logFirstAvailable(books: readonly any[]) {
     for (let book of books) {
         if (book.available) {
             console.log('logFirstAvailable: First available book: ', book.title);
@@ -62,16 +86,17 @@ function getBookAuthorByIndex(index: number): [string, string] {
 function calcTotalPages(): bigint {
     type library = {
         lib: string,
+        assertions: number,
         books: number,
         avgPagesPerBook: number
     }
 
     const libs: library[] = [
-        {lib: 'libName1', books: 1_000_000_000, avgPagesPerBook: 250},
-        {lib: 'libName2', books: 5_000_000_000, avgPagesPerBook: 300},
-        {lib: 'libName3', books: 3_000_000_000, avgPagesPerBook: 280}
+        {lib: 'libName1', assertions: 1, books: 1_000_000_000, avgPagesPerBook: 250},
+        {lib: 'libName2', assertions: 1, books: 5_000_000_000, avgPagesPerBook: 300},
+        {lib: 'libName3', assertions: 1, books: 3_000_000_000, avgPagesPerBook: 280}
     ];
-    return libs.reduce((accumulator ,lib: library) => {
+    return libs.reduce((accumulator, lib: library) => {
         return accumulator + BigInt(lib.avgPagesPerBook) * BigInt(lib.books)
     }, BigInt(0));
 }
