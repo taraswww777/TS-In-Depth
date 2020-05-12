@@ -79,7 +79,7 @@ function logFirstAvailable(books: readonly any[]) {
 
 function getBookTitlesByCategory(category: Category): string[] {
     let titles: string[] = [];
-    getAllBooks().forEach((book)=>{
+    getAllBooks().forEach((book) => {
         if (book.category === category) {
             titles.push(book.title);
         }
@@ -109,9 +109,15 @@ function calcTotalPages(): bigint {
     }, BigInt(0));
 }
 
-function getBookByID(bookId:number):any{
-    return getAllBooks().find((book)=>book.id === bookId)
+function getBookByID(bookId: number): any {
+    return getAllBooks().find((book) => book.id === bookId)
 }
+
+function createCustomerID(name: string, id: string): string {
+    return `${name} ${id}`;
+}
+
+let idGenerator = (name: string, id: string): string => `${name} ${id}`;
 
 console.log('Task 02.01. Basic Types:');
 logFirstAvailable(getAllBooks());
@@ -122,4 +128,12 @@ console.log('calcTotalPages: ', calcTotalPages());
 console.log('---');
 console.log('Task 03.01. Arrow Functions');
 logBookTitles(getBookTitlesByCategory(Category.JavaScript));
-console.log('getBookByID:',getBookByID(1) );
+console.log('getBookByID:', getBookByID(1));
+
+console.log('---');
+console.log('Task 03.02. Function Type');
+const myID = '33';
+console.log('createCustomerID: ', createCustomerID('random user1', myID));
+console.log('createCustomerID: ', idGenerator('random user2', myID));
+idGenerator = createCustomerID;
+console.log('createCustomerID: ', idGenerator('random user3', myID));
