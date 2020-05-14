@@ -119,6 +119,26 @@ function createCustomerID(name: string, id: string): string {
 
 let idGenerator = (name: string, id: string): string => `${name} ${id}`;
 
+interface Person {
+    name: string,
+    email: string,
+}
+
+interface Librarian extends Person{
+    department: string,
+    assistCustomer: () => void
+}
+
+class UniversityLibrarian implements Librarian{
+    department: string;
+    email: string;
+    name: string;
+
+    assistCustomer(): void {
+        console.log('name:', this.name );
+    }
+}
+
 console.log('Task 02.01. Basic Types:');
 logFirstAvailable(getAllBooks());
 logBookTitles(getBookTitlesByCategory(Category.Angular));
@@ -137,3 +157,8 @@ console.log('createCustomerID: ', createCustomerID('random user1', myID));
 console.log('createCustomerID: ', idGenerator('random user2', myID));
 idGenerator = createCustomerID;
 console.log('createCustomerID: ', idGenerator('random user3', myID));
+
+console.log('---');
+console.log('Task 05.04. Interfaces for Class Types:');
+const favoriteLibrarian = new UniversityLibrarian();
+favoriteLibrarian.name = 'Den';
