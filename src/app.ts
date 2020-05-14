@@ -52,3 +52,13 @@ const personBook: PersonBook = {
 }
 console.log('personBook', personBook);
 
+console.log('---');
+console.log('Task 06.05. Dynamic Import Expression');
+const flag = false;
+if (flag) {
+    import('./classes').then(module => {
+        const reader = new module.Reader()
+        reader.name = 'Anna'
+        console.log('render:', reader);
+    });
+}
