@@ -13,6 +13,24 @@ type library = {
     avgPagesPerBook: number
 }
 
+interface Person {
+    name: string,
+    email: string,
+}
+
+interface Book {
+    id: number,
+    author: string,
+}
+
+type PersonBook = Person & Book;
+type BookOrUndefined = Book | undefined;
+
+interface Librarian extends Person{
+    department: string,
+    assistCustomer: () => void
+}
+
 function getAllBooks(): ReadonlyArray<any> {
     return [
         {
@@ -109,7 +127,7 @@ function calcTotalPages(): bigint {
     }, BigInt(0));
 }
 
-function getBookByID(bookId: number): any {
+function getBookByID(bookId: number): BookOrUndefined {
     return getAllBooks().find((book) => book.id === bookId)
 }
 
@@ -118,16 +136,6 @@ function createCustomerID(name: string, id: string): string {
 }
 
 let idGenerator = (name: string, id: string): string => `${name} ${id}`;
-
-interface Person {
-    name: string,
-    email: string,
-}
-
-interface Librarian extends Person{
-    department: string,
-    assistCustomer: () => void
-}
 
 class UniversityLibrarian implements Librarian{
     department: string;
@@ -162,3 +170,13 @@ console.log('---');
 console.log('Task 05.04. Interfaces for Class Types:');
 const favoriteLibrarian = new UniversityLibrarian();
 favoriteLibrarian.name = 'Den';
+
+console.log('---');
+console.log('Task 05.05. Intersection and Union Types');
+const personBook: PersonBook = {
+    id: 0,
+    author: "",
+    name: 'qwe',
+    email: 'qwe@w.w'
+}
+console.log('personBook', personBook);
