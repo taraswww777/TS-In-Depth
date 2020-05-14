@@ -10,6 +10,7 @@ import {
     getBookByID, createCustomerID
 } from "./functions";
 import {Category} from "./enums";
+import {default as RefBook} from "./encyclopedia";
 
 
 let idGenerator = (name: string, id: string): string => `${name} ${id}`;
@@ -34,6 +35,10 @@ idGenerator = createCustomerID;
 console.log('createCustomerID: ', idGenerator('random user3', myID));
 
 console.log('---');
+console.log('Task 05.02');
+const refBook: RefBook = new RefBook();
+
+console.log('---');
 console.log('Task 05.04. Interfaces for Class Types:');
 const favoriteLibrarian = new UniversityLibrarian();
 favoriteLibrarian.name = 'Den';
@@ -47,3 +52,4 @@ const personBook: PersonBook = {
     email: 'qwe@w.w'
 }
 console.log('personBook', personBook);
+
