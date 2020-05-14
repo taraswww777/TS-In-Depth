@@ -1,5 +1,4 @@
 import {PersonBook} from "./types";
-import {UniversityLibrarian} from "./classes";
 import {
     logFirstAvailable,
     logBookTitles,
@@ -10,7 +9,7 @@ import {
     getBookByID, createCustomerID
 } from "./functions";
 import {Category} from "./enums";
-import {default as RefBook} from "./encyclopedia";
+import {RefBook, UniversityLibrarian} from "./classes";
 
 
 let idGenerator = (name: string, id: string): string => `${name} ${id}`;
